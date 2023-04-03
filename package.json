@@ -3,9 +3,28 @@
   "displayName": "A-ramda-snippets",
   "description": "ramda中文代码片段",
   "version": "0.0.1",
+  "publisher": "xuedao",
+  "author": {
+    "name": "Xue Dao",
+    "email": "34347476@qq.com"
+  },
+  "homepage": "https://github.com/qq34347476/A-ramda-snippets/README.md",
+  "bugs": {
+    "url": "https://github.com/qq34347476/A-ramda-snippets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qq34347476/A-ramda-snippets"
+  },
+  "icon": "icon/icon.png",
   "engines": {
     "vscode": "^1.76.0"
   },
+  "keywords": [
+    "snippets",
+    "xuedao",
+    "ramda"
+  ],
   "categories": [
     "Snippets"
   ],

@@ -1,1 +1,254 @@
-{}
+{
+    "比较两个值是否相等（支持对象的比较）": {
+        "prefix": [
+            "R-equals",
+            "R="
+        ],
+        "body": [
+            "R.equals(${1:target1},${2:target2})"
+        ],
+        "description": [
+            "比较两个值是否相等（支持对象的比较）"
+        ]
+    },
+    "相当于||运算": {
+        "prefix": [
+            "R-either",
+            "R||"
+        ],
+        "body": [
+            "R.either(${1:fun1},${2:fun2})"
+        ],
+        "description": "相当于||运算"
+    },
+    "相当于&&运算(接受两个函数)": {
+        "prefix": [
+            "R-both",
+            "R&&"
+        ],
+        "body": [
+            "R.both(${1:fun1},${2:fun2})"
+        ],
+        "description": "相当于&&运算(接受两个函数)"
+    },
+    "相当于&&运算(接受一个函数数组Array)": {
+        "prefix": [
+            "R-allPass",
+            "R&&"
+        ],
+        "body": [
+            "R.allPass([${1:fun1},${2:fun2}])"
+        ],
+        "description": "相当于&&运算(接受一个函数数组Array)"
+    },
+    "判断正则是否通过": {
+        "prefix": "R-test",
+        "body": [
+            "R.test(${1:Reg},${2:String})"
+        ],
+        "description": "判断正则是否通过"
+    },
+    "类似Array.includes(也可以判断字符串中是否包含指定值)": {
+        "prefix": "R-includes",
+        "body": [
+            "R.includes(${1:target},${2:String/Array})"
+        ],
+        "description": "类似Array.includes(也可以判断字符串中是否包含指定值)"
+    },
+    "类似Array.some(只要有一个元素满足条件，返回true)": {
+        "prefix": [
+            "R-any",
+            "R-some"
+        ],
+        "body": [
+            "R.any(${1:fun},[${2:dataSource}])"
+        ],
+        "description": "类似Array.some\n(只要有一个元素满足条件，返回true)"
+    },
+    "类似Array.every(所有元素都满足指定函数时，返回true)": {
+        "prefix": [
+            "R-all",
+            "R-every"
+        ],
+        "body": [
+            "R.all(${1:fun},[${2:dataSource}])"
+        ],
+        "description": "类似Array.every(所有元素都满足指定函数时，返回true)"
+    },
+    "都不满足条件，返回true": {
+        "prefix": "R-none",
+        "body": [
+            "R.none(${1:fun},[${2:dataSource}])"
+        ],
+        "description": "都不满足条件，返回true"
+    },
+    "返回数组或者字符串的第一个元素，空数组会返回undefined": {
+        "prefix": [
+            "R-head",
+        ],
+        "body": [
+            "R.head(${1:Array/String})"
+        ],
+        "description": "返回数组或者字符串的第一个元素，空数组会返回undefined"
+    },
+    "返回列表或字符串的最后一个元素，空数组会返回undefined": {
+        "prefix": "R-last",
+        "body": [
+            "R.last(${1:Array/String})"
+        ],
+        "description": "返回列表或字符串的最后一个元素，空数组会返回undefined"
+    },
+    "类似Array.filter(返回满足条件的元素,Object也能用)": {
+        "prefix": "R-filter",
+        "body": [
+            "R.filter(${1:fun}, ${2:obj/arr})"
+        ],
+        "description": "类似Array.filter(返回满足条件的元素,Object也能用)"
+    },
+    "filter的补集(返回不满足条件的元素,Object也能用)": {
+        "prefix": "R-reject",
+        "body": [
+            "R.reject(${1:fun}, ${2:obj/arr})"
+        ],
+        "description": "filter的补集(返回不满足条件的元素,Object也能用)"
+    },
+    "返回指定元素以外的元素": {
+        "prefix": "R-without",
+        "body": [
+            "R.without(${1:arr1}, ${2:arr2})"
+        ],
+        "description": [
+            "返回指定元素以外的元素",
+            "R.without([1, 2])([1, 2, 1, 3, 4]) // => [3,4]"
+        ]
+    },
+    "取出对象中指定属性的值。如果不存在，则返回 undefined。": {
+        "prefix": "R-prop",
+        "body": [
+            "R.prop(${1:str/index}, ${2:obj/arr})"
+        ],
+        "description": "取出对象中指定属性的值。如果不存在，则返回 undefined。"
+    },
+    "取出对象中多个指定属性的值。如果不存在，则返回 undefined。": {
+        "prefix": "R-props",
+        "body": [
+            "R.props([${1:keys}], [${2:obj}])"
+        ],
+        "description": [
+            "取出对象中多个指定属性的值。如果不存在，则返回 undefined。",
+            "R.props(['c', 'a', 'b'], {b: 2, a: 1}); //=> [undefined, 1, 2]"
+        ]
+    },
+    "创建一个降序比较函数。": {
+        "prefix": "R-descend",
+        "body": [
+            "R.descend(R.prop(${1:str}))",
+        ],
+        "description": [
+            "创建一个降序比较函数。",
+            "const byAge = R.descend(R.prop('age'));",
+            "const people = [",
+            "  { name: 'Emma', age: 70 },",
+            "  { name: 'Peter', age: 78 },",
+            "  { name: 'Mikhail', age: 62 },",
+            "];",
+            "const peopleByOldestFirst = R.sort(byAge, people);",
+            "  //=> [{ name: 'Peter', age: 78 }, { name: 'Emma', age: 70 }, { name: 'Mikhail', age: 62 }]"
+        ]
+    },
+    "创建一个升序比较函数。": {
+        "prefix": "R-ascend",
+        "body": [
+            "R.ascend(R.prop(${1:str}))",
+        ],
+        "description": [
+            "创建一个升序比较函数。",
+            "const byAge = R.ascend(R.prop('age'));",
+            "const people = [",
+            "  { name: 'Emma', age: 70 },",
+            "  { name: 'Peter', age: 78 },",
+            "  { name: 'Mikhail', age: 62 },",
+            "];",
+            "const peopleByYoungestFirst = R.sort(byAge, people);",
+            "  //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]"
+        ]
+    },
+    "使用比较函数对列表进行排序": {
+        "prefix": "R-sort",
+        "body": [
+            "R.sort(R.${1|descend,ascend|}(str), ${2:arr})"
+        ],
+        "description": "使用比较函数对列表进行排序"
+    },
+    "依据比较函数列表对输入列表进行排序。": {
+        "prefix": "R-sortWith",
+        "body": [
+            "R.sortWith([",
+            "  R.descend(R.prop('age')),",
+            "  R.ascend(R.prop('name'))",
+            "])"
+        ],
+        "description": "依据比较函数列表对输入列表进行排序。"
+    },
+    "把一个数组按照函数返回的结果分成多个数组存在一个对象中，该函数返回值为字符串。": {
+        "prefix": "R-groupBy",
+        "body": [
+            "R.groupBy(${1:fun => str})",
+        ],
+        "description": [
+            "把一个数组按照函数返回的结果分成多个数组存在一个对象中，该函数返回值为字符串。",
+            "const byGrade = R.groupBy(function(student) {",
+            "  const score = student.score;",
+            "  return score < 65 ? 'F' :",
+            "         score < 70 ? 'D' :",
+            "         score < 80 ? 'C' :",
+            "         score < 90 ? 'B' : 'A';",
+            "});",
+            "const students = [{name: 'Abby', score: 84},",
+            "                {name: 'Eddy', score: 58},",
+            "                // ...",
+            "                {name: 'Jack', score: 69}];",
+            "byGrade(students);",
+            "// {",
+            "//   'A': [{name: 'Dianne', score: 99}],",
+            "//   'B': [{name: 'Abby', score: 84}]",
+            "//   // ...,",
+            "//   'F': [{name: 'Eddy', score: 58}]",
+            "// }"
+        ]
+    },
+    "将两个列表对应位置的元素组合，生成一个新的元素对列表": {
+        "prefix": "R-zip",
+        "body": [
+            "R.zip(${1:arr1}, ${2:arr2})",
+        ],
+        "description": [
+            "将两个列表对应位置的元素组合，生成一个新的元素对列表",
+            "R.zip([1, 2, 3], ['a', 'b', 'c']); //=> [[1, 'a'], [2, 'b'], [3, 'c']]"
+        ]
+    },
+    "将两个列表对应位置的元素作为键值对组合，生成一个新的键值对的列表": {
+        "prefix": "R-zipObj",
+        "body": [
+            "R.zipObj(${1:arrKeys}, ${2:arrValues})",
+        ],
+        "description": [
+            "将两个列表对应位置的元素作为键值对组合，生成一个新的键值对的列表",
+            "R.zipObj(['a', 'b', 'c'], [1, 2, 3]); //=> {a: 1, b: 2, c: 3}"
+        ]
+    },
+    "如果指定对象属性与给定的值相等，则返回 true": {
+        "prefix": "R-propEq",
+        "body": [
+            "R.propEq(${1:key}, ${2:value})"
+        ],
+        "description": "如果指定对象属性与给定的值相等，则返回 true"
+    },
+    "类似Array.findIndex": {
+        "prefix": "R-findIndex",
+        "body": [
+            "R.findIndex(R.propEq(${1:key}, ${2:value}))(${3:arrObj})"
+        ],
+        "description": "类似Array.findIndex"
+    }
+}
