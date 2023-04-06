@@ -1,9 +1,14 @@
 # Change Log
 
-All notable changes to the "A-ramda-snippets" extension will be documented in this file.
+Check [Github](https://github.com/qq34347476/web/) 浏览更多。
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+Check [留言](https://github.com/qq34347476/web/issues)语法用法等 BUG 提交，更多建议。
 
-## [Unreleased]
+## [0.0.2] - 2023-04-01
 
-- Initial release
+- 增加部分语法
+
+## [0.0.1] - 2023-04-01
+
+- 提供部分常用命令
+- 初始化

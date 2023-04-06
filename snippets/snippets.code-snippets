@@ -1,90 +1,120 @@
 {
-    "比较两个值是否相等（支持对象的比较）": {
-        "prefix": [
-            "R-equals",
-            "R="
-        ],
+    // 其他
+    "返回一个返回恒定值的函数": {
+        "prefix": "R.always",
         "body": [
-            "R.equals(${1:target1},${2:target2})"
+            "R.always(${1:target})"
+        ],
+        "description": "返回一个返回恒定值的函数"
+    },
+    "将函数 fn 作用于参数列表 args": {
+        "prefix": "R.apply",
+        "body": [
+            "R.apply(${1:fn},${2:args})"
+        ],
+        "description": "将函数 fn 作用于参数列表 args"
+    },
+    "接受一个值，并将一个函数作用于其上": {
+        "prefix": "R.applyTo",
+        "body": [
+            "R.applyTo(${1:target},${2:fn})"
+        ],
+        "description": "接受一个值，并将一个函数作用于其上"
+    },
+    "将任意元函数封装为二元函数（只接受2个参数）中": {
+        "prefix": "R.binary",
+        "body": [
+            "R.binary(${1:fn(a,b)})"
+        ],
+        "description": "将任意元函数封装为二元函数（只接受2个参数）中"
+    },
+    "创建一个绑定了上下文的函数。": {
+        "prefix": "R.bind",
+        "body": [
+            "R.bind(${1:fn})"
         ],
         "description": [
-            "比较两个值是否相等（支持对象的比较）"
+            "创建一个绑定了上下文的函数。",
+            "注意：与 Function.prototype.bind 不同，R.bind 不会绑定额外参数。"
         ]
     },
-    "相当于||运算": {
-        "prefix": [
-            "R-either",
-            "R||"
-        ],
+    "提取第一个参数作为函数，其余参数作为刚提取的函数的参数，调用该函数并将结果返回": {
+        "prefix": "R.call",
         "body": [
-            "R.either(${1:fun1},${2:fun2})"
+            "R.call(${1:fn}, ${2:args})"
         ],
-        "description": "相当于||运算"
+        "description": "提取第一个参数作为函数，其余参数作为刚提取的函数的参数，调用该函数并将结果返回"
     },
-    "相当于&&运算(接受两个函数)": {
-        "prefix": [
-            "R-both",
-            "R&&"
-        ],
+    "深拷贝": {
+        "prefix": "R.clone",
         "body": [
-            "R.both(${1:fun1},${2:fun2})"
+            "R.clone(${1:target})"
         ],
-        "description": "相当于&&运算(接受两个函数)"
+        "description": "深拷贝"
     },
-    "相当于&&运算(接受一个函数数组Array)": {
-        "prefix": [
-            "R-allPass",
-            "R&&"
-        ],
+    "连接列表或字符串": {
+        "prefix": "R.concat",
         "body": [
-            "R.allPass([${1:fun1},${2:fun2}])"
+            "R.concat(${1:target1}, ${2:target2})"
         ],
-        "description": "相当于&&运算(接受一个函数数组Array)"
+        "description": "连接列表或字符串"
     },
-    "判断正则是否通过": {
-        "prefix": "R-test",
+    "if/else": {
+        "prefix": "R.cond",
         "body": [
-            "R.test(${1:Reg},${2:String})"
+            "R.cond([[${1:if...},${2:then...}],[${3:R.T},${4:then...}]])"
         ],
-        "description": "判断正则是否通过"
+        "description": [
+            "if/else"
+        ]
     },
-    "类似Array.includes(也可以判断字符串中是否包含指定值)": {
-        "prefix": "R-includes",
+    "将构造函数封装进柯里化函数": {
+        "prefix": "R.construct",
         "body": [
-            "R.includes(${1:target},${2:String/Array})"
+            "R.construct(${1:fn})"
         ],
-        "description": "类似Array.includes(也可以判断字符串中是否包含指定值)"
+        "description": "将构造函数封装进柯里化函数"
     },
-    "类似Array.some(只要有一个元素满足条件，返回true)": {
-        "prefix": [
-            "R-any",
-            "R-some"
-        ],
+    "将构造函数封装进柯里化函数(可使用变参构造函数)": {
+        "prefix": "R.constructN",
         "body": [
-            "R.any(${1:fun},[${2:dataSource}])"
+            "R.constructN(${1:num}, ${2:fn})"
         ],
-        "description": "类似Array.some\n(只要有一个元素满足条件，返回true)"
+        "description": [
+            "将构造函数封装进柯里化函数(可使用变参构造函数)",
+            "为了能够使用变参的构造函数，返回函数的元数需要明确指定"
+        ]
     },
-    "类似Array.every(所有元素都满足指定函数时，返回true)": {
-        "prefix": [
-            "R-all",
-            "R-every"
-        ],
+    "对函数进行柯里化": {
+        "prefix": "R.curry",
         "body": [
-            "R.all(${1:fun},[${2:dataSource}])"
+            "R.curry(${1:fn})"
         ],
-        "description": "类似Array.every(所有元素都满足指定函数时，返回true)"
+        "description": "对函数进行柯里化"
     },
-    "都不满足条件，返回true": {
-        "prefix": "R-none",
+    "对函数进行柯里化，并限制元素个数": {
+        "prefix": "R.curryN",
         "body": [
-            "R.none(${1:fun},[${2:dataSource}])"
+            "R.curryN(${1:maxNum}, ${1:fn})"
         ],
-        "description": "都不满足条件，返回true"
+        "description": "对函数进行柯里化，并限制元素个数"
     },
+    "清空，返回传入值类型的空值": {
+        "prefix": "R.empty",
+        "body": [
+            "R.empty(${1:target})"
+        ],
+        "description": [
+            "清空，返回传入值类型的空值",
+            "R.empty([1, 2, 3]);              //=> []",
+            "R.empty({x: 1, y: 2});           //=> {}"
+        ]
+    },
+    // 查找类 R.fi
     "返回数组或者字符串的第一个元素，空数组会返回undefined": {
         "prefix": [
-            "R-head",
+            "R.head",
+            "R.fi"
         ],
         "body": [
             "R.head(${1:Array/String})"
@@ -92,28 +122,20 @@
         "description": "返回数组或者字符串的第一个元素，空数组会返回undefined"
     },
     "返回列表或字符串的最后一个元素，空数组会返回undefined": {
-        "prefix": "R-last",
+        "prefix": [
+            "R.last",
+            "R.fi"
+        ],
         "body": [
             "R.last(${1:Array/String})"
         ],
         "description": "返回列表或字符串的最后一个元素，空数组会返回undefined"
     },
-    "类似Array.filter(返回满足条件的元素,Object也能用)": {
-        "prefix": "R-filter",
-        "body": [
-            "R.filter(${1:fun}, ${2:obj/arr})"
-        ],
-        "description": "类似Array.filter(返回满足条件的元素,Object也能用)"
-    },
-    "filter的补集(返回不满足条件的元素,Object也能用)": {
-        "prefix": "R-reject",
-        "body": [
-            "R.reject(${1:fun}, ${2:obj/arr})"
-        ],
-        "description": "filter的补集(返回不满足条件的元素,Object也能用)"
-    },
     "返回指定元素以外的元素": {
-        "prefix": "R-without",
+        "prefix": [
+            "R.without",
+            "R.fi"
+        ],
         "body": [
             "R.without(${1:arr1}, ${2:arr2})"
         ],
@@ -123,14 +145,20 @@
         ]
     },
     "取出对象中指定属性的值。如果不存在，则返回 undefined。": {
-        "prefix": "R-prop",
+        "prefix": [
+            "R.prop",
+            "R.fi"
+        ],
         "body": [
             "R.prop(${1:str/index}, ${2:obj/arr})"
         ],
         "description": "取出对象中指定属性的值。如果不存在，则返回 undefined。"
     },
     "取出对象中多个指定属性的值。如果不存在，则返回 undefined。": {
-        "prefix": "R-props",
+        "prefix": [
+            "R.props",
+            "R.fi"
+        ],
         "body": [
             "R.props([${1:keys}], [${2:obj}])"
         ],
@@ -139,61 +167,415 @@
             "R.props(['c', 'a', 'b'], {b: 2, a: 1}); //=> [undefined, 1, 2]"
         ]
     },
-    "创建一个降序比较函数。": {
-        "prefix": "R-descend",
+    "类似Array.findIndex": {
+        "prefix": [
+            "R.findIndex",
+            "R.fi"
+        ],
         "body": [
-            "R.descend(R.prop(${1:str}))",
+            "R.findIndex(R.propEq(${1:key}, ${2:value}))(${3:arrObj})"
+        ],
+        "description": "类似Array.findIndex"
+    },
+    // 运算 
+    "相当于||运算(接受两个函数)": {
+        "prefix": [
+            "R.either",
+            "R||"
+        ],
+        "body": [
+            "R.either(${1:fun1},${2:fun2})"
+        ],
+        "description": "相当于||运算"
+    },
+    "相当于||运算(接受一个函数数组Array)": {
+        "prefix": [
+            "R.anyPass",
+            "R||"
+        ],
+        "body": [
+            "R.anyPass([${1:fun1},${2:fun2}])"
+        ],
+        "description": "相当于||运算(接受一个函数数组Array)"
+    },
+    "相当于&&运算(接受两个函数)": {
+        "prefix": [
+            "R.both",
+            "R&&"
+        ],
+        "body": [
+            "R.both(${1:fun1},${2:fun2})"
+        ],
+        "description": "相当于&&运算(接受两个函数)"
+    },
+    "相当于&&运算(接受一个函数数组Array)": {
+        "prefix": [
+            "R.allPass",
+            "R&&"
+        ],
+        "body": [
+            "R.allPass([${1:fun1},${2:fun2}])"
+        ],
+        "description": "相当于&&运算(接受一个函数数组Array)"
+    },
+    "相当于!取反": {
+        "prefix": [
+            "R.complement",
+            "R!"
+        ],
+        "body": [
+            "R.complement(${1:target})"
+        ],
+        "description": "相当于!取反"
+    },
+    "相当于|": {
+        "prefix": [
+            "R.defaultTo",
+            "R|"
+        ],
+        "body": [
+            "R.defaultTo(${1:defaultValue})"
         ],
         "description": [
-            "创建一个降序比较函数。",
-            "const byAge = R.descend(R.prop('age'));",
-            "const people = [",
-            "  { name: 'Emma', age: 70 },",
-            "  { name: 'Peter', age: 78 },",
-            "  { name: 'Mikhail', age: 62 },",
-            "];",
-            "const peopleByOldestFirst = R.sort(byAge, people);",
-            "  //=> [{ name: 'Peter', age: 78 }, { name: 'Emma', age: 70 }, { name: 'Mikhail', age: 62 }]"
+            "相当于|",
+            "如果第二个参数不是 null、undefined 或 NaN，则返回第二个参数",
+            "否则返回第一个参数（默认值）"
         ]
     },
-    "创建一个升序比较函数。": {
-        "prefix": "R-ascend",
+    // 返回是boolean 
+    "比较两个值是否相等（支持对象的比较）": {
+        "prefix": [
+            "R.equals",
+            "R.bool"
+        ],
         "body": [
-            "R.ascend(R.prop(${1:str}))",
+            "R.equals(${1:target1},${2:target2})"
         ],
         "description": [
-            "创建一个升序比较函数。",
-            "const byAge = R.ascend(R.prop('age'));",
-            "const people = [",
-            "  { name: 'Emma', age: 70 },",
-            "  { name: 'Peter', age: 78 },",
-            "  { name: 'Mikhail', age: 62 },",
-            "];",
-            "const peopleByYoungestFirst = R.sort(byAge, people);",
-            "  //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]"
+            "比较两个值是否相等（支持对象的比较）"
         ]
     },
-    "使用比较函数对列表进行排序": {
-        "prefix": "R-sort",
-        "body": [
-            "R.sort(R.${1|descend,ascend|}(str), ${2:arr})"
+    "判断obj中指定key的value是否等于指定值": {
+        "prefix": [
+            "R.propEq",
+            "R.bool"
         ],
-        "description": "使用比较函数对列表进行排序"
+        "body": [
+            "R.propEq(${1:key}, ${2:value})"
+        ],
+        "description": "判断obj中指定key的value是否等于指定值"
     },
-    "依据比较函数列表对输入列表进行排序。": {
-        "prefix": "R-sortWith",
-        "body": [
-            "R.sortWith([",
-            "  R.descend(R.prop('age')),",
-            "  R.ascend(R.prop('name'))",
-            "])"
+    "通过传入函数对两个值进行相等性判断": {
+        "prefix": [
+            "R.eqBy",
+            "R.bool"
         ],
-        "description": "依据比较函数列表对输入列表进行排序。"
+        "body": [
+            "R.eqBy(${1:fn}, ${2:target1}, ${3:target2})"
+        ],
+        "description": [
+            "通过传入函数对两个值进行相等性判断",
+            "R.eqBy(Math.abs, 5, -5); //=> true"
+        ]
+    },
+    "判断两个对象指定的属性值是否相等": {
+        "prefix": [
+            "R.eqProps",
+            "R.bool"
+        ],
+        "body": [
+            "R.eqProps(${1:key}, ${2:obj1}, ${3:obj2})"
+        ],
+        "description": "判断两个对象指定的属性值是否相等"
+    },
+    "判断正则是否通过": {
+        "prefix": [
+            "R.test",
+            "R.bool"
+        ],
+        "body": [
+            "R.test(${1:Reg},${2:String})"
+        ],
+        "description": "判断正则是否通过"
+    },
+    "类似Array.includes(也可以判断字符串中是否包含指定值)": {
+        "prefix": [
+            "R.includes",
+            "R.bool"
+        ],
+        "body": [
+            "R.includes(${1:target},${2:String/Array})"
+        ],
+        "description": "类似Array.includes(也可以判断字符串中是否包含指定值)"
+    },
+    "类似Array.some(只要有一个元素满足条件，返回true)": {
+        "prefix": [
+            "R.some",
+            "R.any",
+            "R.bool"
+        ],
+        "body": [
+            "R.any(${1:fn},[${2:dataSource}])"
+        ],
+        "description": "类似Array.some\n(只要有一个元素满足条件，返回true)"
+    },
+    "类似Array.every(所有元素都满足指定函数时，返回true)": {
+        "prefix": [
+            "R.all",
+            "R.every",
+            "R.bool"
+        ],
+        "body": [
+            "R.all(${1:fn},[${2:dataSource}])"
+        ],
+        "description": "类似Array.every(所有元素都满足指定函数时，返回true)"
+    },
+    "都不满足条件，返回true": {
+        "prefix": [
+            "R.none",
+            "R.bool"
+        ],
+        "body": [
+            "R.none(${1:fn},[${2:dataSource}])"
+        ],
+        "description": "都不满足条件，返回true"
+    },
+    "是否以指定元素结尾": {
+        "prefix": [
+            "R.endsWith",
+            "R.bool"
+        ],
+        "body": [
+            "R.endsWith(${1:targetArr/str}, ${2:arr/str})"
+        ],
+        "description": [
+            "是否以指定元素结尾",
+            "如果是判断arr，第一个参数也必须是[]包裹"
+        ]
+    },
+    "是否以指定元素开始": {
+        "prefix": [
+            "R.startsWith",
+            "R.bool"
+        ],
+        "body": [
+            "R.startsWith(${1:targetArr/str}, ${2:arr/str})"
+        ],
+        "description": [
+            "是否以指定元素开始",
+            "如果是判断arr，第一个参数也必须是[]包裹"
+        ]
+    },
+    // Number 
+    "两数相加": {
+        "prefix": [
+            "R.add",
+            "R.num"
+        ],
+        "body": [
+            "R.add(${1:num1} ,${2:num2})"
+        ],
+        "description": [
+            "两数相加",
+            "经测试ramda未经行处理",
+            "建议使用bigNumber.js进行运算"
+        ]
+    },
+    "两数相减": {
+        "prefix": [
+            "R.subtract",
+            "R.num"
+        ],
+        "body": [
+            "R.subtract(${1:num1} ,${2:num2})"
+        ],
+        "description": [
+            "两数相减",
+            "经测试ramda未经行处理",
+            "建议使用bigNumber.js进行运算"
+        ]
+    },
+    "两数相除": {
+        "prefix": [
+            "R.divide",
+            "R.num"
+        ],
+        "body": [
+            "R.divide(${1:num1} ,${2:num2})"
+        ],
+        "description": [
+            "两数相除",
+            "经测试ramda未经行处理",
+            "建议使用bigNumber.js进行运算"
+        ]
+    },
+    "两数相乘": {
+        "prefix": [
+            "R.multiply",
+            "R.num"
+        ],
+        "body": [
+            "R.multiply(${1:num1} ,${2:num2})"
+        ],
+        "description": [
+            "两数相乘",
+            "经测试ramda未经行处理",
+            "建议使用bigNumber.js进行运算"
+        ]
+    },
+    "将数字限制在指定的范围内": {
+        "prefix": [
+            "R.clamp",
+            "R.num"
+        ],
+        "body": [
+            "R.clamp(${1:minNum}, ${2:maxNum}, ${3:targetNum})"
+        ],
+        "description": [
+            "将数字限制在指定的范围内",
+            "大于返回最大值，小于返回最小值"
+        ]
+    },
+    "返回符合条件的列表个数。": {
+        "prefix": [
+            "R.count",
+            "R.num"
+        ],
+        "body": [
+            "R.count(${1:fn}, ${2:arr})"
+        ],
+        "description": [
+            "返回符合条件的列表个数。",
+            "R.count(n => n > 2, [1,2,3,4,5,6]) // => 4"
+        ]
+    },
+    "减1": {
+        "prefix": [
+            "R.dec",
+            "R.num"
+        ],
+        "body": [
+            "R.dec(${1:num})"
+        ],
+        "description": "减1"
+    },
+    // object
+    "接受一个属性值为函数的对象，返回一个能生成相同结构对象的函数": {
+        "prefix": [
+            "R.applySpec",
+            "R.obj"
+        ],
+        "body": [
+            "R.applySpec(${1:object})",
+        ],
+        "description": [
+            "接受一个属性值为函数的对象，返回一个能生成相同结构对象的函数。",
+            "返回的函数使用传入的参数调用对象的每个属性位对应的函数，来生成相应属性的值。",
+            "const getMetrics = R.applySpec({",
+            "  sum: R.add,",
+            "  nested: { mul: R.multiply }",
+            "});",
+            "getMetrics(2, 4); // => { sum: 6, nested: { mul: 8 } }",
+        ]
+    },
+    "浅复制对象，然后设置或覆盖对象的指定属性(平铺的obj，直接设置某个元素)": {
+        "prefix": [
+            "R.assoc",
+            "R.obj"
+        ],
+        "body": [
+            "R.assoc(${1:key},${2:value},${3:obj})"
+        ],
+        "description": [
+            "浅复制对象，然后设置或覆盖对象的指定属性",
+            "平铺的obj，直接设置某个元素",
+            "R.assoc('c', 3, {a: 1, b: 2}); //=> {a: 1, b: 2, c: 3}"
+        ]
+    },
+    "浅复制对象，然后设置或覆盖对象的指定属性(嵌套obj，arr路径上设置某个元素)": {
+        "prefix": "R.assocPath",
+        "body": [
+            "R.assocPath([${1:pathArgs}],${2:value},${3:obj})"
+        ],
+        "description": [
+            "浅复制对象，然后设置或覆盖对象的指定属性",
+            "嵌套obj，arr路径上设置某个元素",
+            "R.assocPath(['a', 'b', 'c'], 42, {a: {b: {c: 0}}}); //=> {a: {b: {c: 42}}}"
+        ]
+    },
+    "删除对象中指定属性": {
+        "prefix": [
+            "R.dissoc",
+            "R.obj"
+        ],
+        "body": [
+            "R.dissoc(${1:key}, ${2:obj})"
+        ],
+        "description": [
+            "删除对象中指定属性",
+            "R.dissoc('b', {a: 1, b: 2, c: 3}); //=> {a: 1, c: 3}"
+        ]
+    },
+    "删除对象中指定属性(嵌套obj)": {
+        "prefix": [
+            "R.dissocPath",
+            "R.obj"
+        ],
+        "body": [
+            "R.dissocPath([${1:pathKeyArgs}], ${2:obj})"
+        ],
+        "description": [
+            "删除对象中指定属性(嵌套obj)",
+            "R.dissocPath(['a', 'b', 'c'], {a: {b: {c: 42}}}); //=> {a: {b: {}}}"
+        ]
+    },
+    "递归地对object的属性进行变换": {
+        "prefix": [
+            "R.evolve",
+            "R.obj"
+        ],
+        "body": [
+            "R.evolve(${1:transformFnObj}, ${2:obj})",
+        ],
+        "description": [
+            "递归地对object的属性进行变换",
+            "const tomato = {firstName: '  Tomato ', data: {elapsed: 100, remaining: 1400}, id:123};",
+            "const transformations = {",
+            "  firstName: R.trim,",
+            "  lastName: R.trim, // Will not get invoked.",
+            "  data: {elapsed: R.add(1), remaining: R.add(-1)}",
+            "};",
+            "R.evolve(transformations, tomato); //=> {firstName: 'Tomato', data: {elapsed: 101, remaining: 1399}, id:123}"
+        ]
+    },
+    // Array
+    "类似Array.filter(返回满足条件的元素,Object也能用)": {
+        "prefix": [
+            "R.filter",
+            "R.arr"
+        ],
+        "body": [
+            "R.filter(${1:fn}, ${2:obj/arr})"
+        ],
+        "description": "类似Array.filter(返回满足条件的元素,Object也能用)"
+    },
+    "filter的补集(返回不满足条件的元素,Object也能用)": {
+        "prefix": [
+            "R.reject",
+            "R.arr"
+        ],
+        "body": [
+            "R.reject(${1:fn}, ${2:obj/arr})"
+        ],
+        "description": "filter的补集(返回不满足条件的元素,Object也能用)"
     },
     "把一个数组按照函数返回的结果分成多个数组存在一个对象中，该函数返回值为字符串。": {
-        "prefix": "R-groupBy",
+        "prefix": [
+            "R.groupBy",
+            "R.arr"
+        ],
         "body": [
-            "R.groupBy(${1:fun => str})",
+            "R.groupBy(${1:fn => str})",
         ],
         "description": [
             "把一个数组按照函数返回的结果分成多个数组存在一个对象中，该函数返回值为字符串。",
@@ -218,7 +600,10 @@
         ]
     },
     "将两个列表对应位置的元素组合，生成一个新的元素对列表": {
-        "prefix": "R-zip",
+        "prefix": [
+            "R.zip",
+            "R.arr"
+        ],
         "body": [
             "R.zip(${1:arr1}, ${2:arr2})",
         ],
@@ -228,7 +613,10 @@
         ]
     },
     "将两个列表对应位置的元素作为键值对组合，生成一个新的键值对的列表": {
-        "prefix": "R-zipObj",
+        "prefix": [
+            "R.zipObj",
+            "R.arr"
+        ],
         "body": [
             "R.zipObj(${1:arrKeys}, ${2:arrValues})",
         ],
@@ -237,18 +625,389 @@
             "R.zipObj(['a', 'b', 'c'], [1, 2, 3]); //=> {a: 1, b: 2, c: 3}"
         ]
     },
-    "如果指定对象属性与给定的值相等，则返回 true": {
-        "prefix": "R-propEq",
-        "body": [
-            "R.propEq(${1:key}, ${2:value})"
+    "处理R.map等Array方法添加两个新的参数：当前索引、整个列表 类似Array.map": {
+        "prefix": [
+            "R.addIndex",
+            "R.arr"
         ],
-        "description": "如果指定对象属性与给定的值相等，则返回 true"
+        "body": [
+            "R.addIndex(${1:R.map})((val, index) => {} ,${2:arr})"
+        ],
+        "description": "处理R.map等Array方法添加两个新的参数：当前索引、整个列表 类似Array.map"
     },
-    "类似Array.findIndex": {
-        "prefix": "R-findIndex",
-        "body": [
-            "R.findIndex(R.propEq(${1:key}, ${2:value}))(${3:arrObj})"
+    "操作数组中指定索引处的值，返回新的数组": {
+        "prefix": [
+            "R.adjust",
+            "R.arr"
         ],
-        "description": "类似Array.findIndex"
+        "body": [
+            "R.adjust(${1:index}, ${2:fn}, ${3:arr})"
+        ],
+        "description": "操作数组中指定索引处的值，返回新的数组"
+    },
+    "替换数组中指定索引处的值，返回新的数组": {
+        "prefix": [
+            "R.update",
+            "R.arr"
+        ],
+        "body": [
+            "R.update(${1:index}, ${2:target}, ${3:arr})"
+        ],
+        "description": "替换数组中指定索引处的值，返回新的数组"
+    },
+    "类似Array.push(在列表末尾拼接一个元素)": {
+        "prefix": [
+            "R.append",
+            "R.arr"
+        ],
+        "body": [
+            "R.append(${1:target},${2:arr})"
+        ],
+        "description": "类似Array.push()"
+    },
+    "根据函数返回，按结果相等拆分成多个子列表": {
+        "prefix": [
+            "R.collectBy",
+            "R.arr"
+        ],
+        "body": [
+            "R.collectBy(${1:R.prop('type')},${2:arr})"
+        ],
+        "description": "根据函数返回，按结果相等拆分成多个子列表"
+    },
+    "按函数返回结果,将结果作为key,value为结果相同的个数,返回一个obj": {
+        "prefix": [
+            "R.countBy",
+            "R.obj"
+        ],
+        "body": [
+            "R.countBy(${1:fn}, ${2:arr})"
+        ],
+        "description": "按函数返回结果,将结果作为key,value为结果相同的个数,返回一个obj"
+    },
+    "求差集": {
+        "prefix": "R.difference",
+        "body": [
+            "R.difference(${1:smallArr}, ${2:bigArr})"
+        ],
+        "description": [
+            "求差集",
+            "求在第一个列表中元素，不在第二个列表中的元素集合",
+            "R.difference([1,2,3,4], [7,6,5,4,3]); //=> [1,2]"
+        ]
+    },
+    "通过fn求差集": {
+        "prefix": "R.differenceWith",
+        "body": [
+            "R.differenceWith(${3:fn},${1:smallArr}, ${2:bigArr})"
+        ],
+        "description": [
+            "通过fn求差集",
+            "求在第一个列表中元素，不在第二个列表中的元素集合",
+            "R.differenceWith((a,b) => a === b, [1,2,3,4], [7,6,5,4,3]); //=> [1,2]"
+        ]
+    },
+    "删除list/String中前几个元素": {
+        "prefix": [
+            "R.drop",
+            "R.arr",
+            "R.str"
+        ],
+        "body": [
+            "R.drop(${1:num}, ${2:arr/str})"
+        ],
+        "description": "删除list/String中前几个元素"
+    },
+    "删除list/String中末尾几个元素": {
+        "prefix": [
+            "R.dropLast",
+            "R.arr",
+            "R.str"
+        ],
+        "body": [
+            "R.dropLast(${1:num}, ${2:arr/str})"
+        ],
+        "description": "删除list/String中末尾几个元素"
+    },
+    "从前删除list/String中满足条件的元素": {
+        "prefix": [
+            "R.dropWhile",
+            "R.arr",
+            "R.str"
+        ],
+        "body": [
+            "R.dropWhile(${1:fn}, ${2:arr/str})"
+        ],
+        "description": [
+            "从前删除list/String中满足条件的元素",
+            "直到遇到第一个false"
+        ]
+    },
+    "从尾删除list/String中满足条件的元素": {
+        "prefix": [
+            "R.dropLastWhile",
+            "R.arr",
+            "R.str"
+        ],
+        "body": [
+            "R.dropLastWhile(${1:fn}, ${2:arr/str})"
+        ],
+        "description": [
+            "从尾删除list/String中满足条件的元素",
+            "直到遇到第一个false"
+        ]
+    },
+    "返回一个没有连续重复元素的list(R.equals判断)": {
+        "prefix": [
+            "R.dropRepeats",
+            "R.arr"
+        ],
+        "body": [
+            "R.dropRepeats(${1:arr})"
+        ],
+        "description": "返回一个没有连续重复元素的list(R.equals判断)"
+    },
+    "返回一个没有连续重复元素的list(自定义函数处理后)": {
+        "prefix": [
+            "R.dropRepeatsWith",
+            "R.arr"
+        ],
+        "body": [
+            "R.dropRepeatsWith(${1:fn}, ${2:arr})"
+        ],
+        "description": "返回一个没有连续重复元素的list(自定义函数处理后)"
+    },
+    // flow 流相关函数
+    "创建一个从左往右执行函数组合(强调数据流向)": {
+        "prefix": [
+            "R.pipe",
+            "R.flow"
+        ],
+        "body": [
+            "R.pipe(${1:fun1} ,${2:fun2} ${3:[,...fun2]})"
+        ],
+        "description": [
+            "创建一个从左往右执行函数组合",
+            "如果参数是通过函数生成的，会使用到R.apply(R.pipe, fns)的写法",
+            "// fn1(fn2(fn3(params))) => R.pipe(fn3, fn2, fn1)(params) 跟数据流向思路一致"
+        ]
+    },
+    "创建一个从左往右执行函数组合（每调用一次函数后将结果进行处理）": {
+        "prefix": [
+            "R.pipeWith",
+            "R.flow"
+        ],
+        "body": [
+            "R.pipeWith(${1:handleFn}, [${2:fun2}, ${3:fun3}])"
+        ],
+        "description": "从右往左执行函数组合（每调用一次函数后将结果进行处理）"
+    },
+    "创建一个从右往左执行函数组合(写法转换)": {
+        "prefix": [
+            "R.compose",
+            "R.flow"
+        ],
+        "body": [
+            "R.compose(${1:fun1}, [${2:fun2}, ${3:fun3}])",
+        ],
+        "description": [
+            "从右往左执行函数组合（右侧函数的输出作为左侧函数的输入）",
+            "最后一个函数可以是任意元函数（参数个数不限），其余函数必须是一元函数",
+            "// fn1(fn2(fn3(params))) => R.compose(fn1, fn2, fn3)(params) 跟平时写法顺序一致"
+        ]
+    },
+    "创建一个从右往左执行函数组合（每调用一次函数后将结果进行处理）": {
+        "prefix": [
+            "R.composeWith",
+            "R.flow"
+        ],
+        "body": [
+            "R.composeWith(${1:handleFn}, [${2:fun1}, ${3:fun1}])"
+        ],
+        "description": "从右往左执行函数组合（每调用一次函数后将结果进行处理）"
+    },
+    "循环函数,依次调用参数为数组的子元素，并返回函数调用结果，最后铺平": {
+        "prefix": [
+            "R.ap",
+            "R.arr",
+            "R.flow"
+        ],
+        "body": [
+            "R.ap(${1:arrFun},${2:arr})"
+        ],
+        "description": [
+            "循环函数,依次调用参数为数组的子元素，并返回函数调用结果，最后铺平",
+            "函数（多）对参数（多）的关系",
+            "若第二个参数自身存在 ap 方法，则调用自身的 ap 方法。柯里化函数也可以作为 applicative。",
+            "简单的来说：arr分别代入函数列表中执行，再将结果connect起来",
+            "R.ap([R.multiply(2), R.add(3)], [1,2,3]); //=> [2, 4, 6, 4, 5, 6]"
+        ]
+    },
+    "循环函数，传入一个参数，函数依次调用参数，返回结果": {
+        "prefix": [
+            "R.juxt",
+            "R.arr",
+            "R.flow"
+        ],
+        "body": [
+            "R.juxt(${1:object})"
+        ],
+        "description": [
+            "循环函数，传入一个参数，函数依次调用参数，返回结果",
+            "函数（多）对参数（1）的关系"
+        ]
+    },
+    "接收一个二元函数 f，一个一元函数 g 和两个值。将两个值应用到函数 g 上，在把返回的结果应用到函数 f 上": {
+        "prefix": [
+            "R.on",
+            "R.flow"
+        ],
+        "body": [
+            "R.on(${1:fn})",
+        ],
+        "description": [
+            "接收一个二元函数 f，一个一元函数 g 和两个值。将两个值应用到函数 g 上，在把返回的结果应用到函数 f 上",
+            "// f(g(v1), g(v2)) => R.on(f, g)(v1, v2)",
+            "const containsInsensitive = R.on(R.includes, R.toLower); // 文档里面有误",
+            "containsInsensitive('o', 'FOO'); //=> true"
+        ]
+    },
+    "接收两个函数分别在第三个函数执行前和执行后执行": {
+        "prefix": [
+            "R.promap",
+            "R.flow"
+        ],
+        "body": [
+            "R.promap(${1:fun1}, ${3:fun3}, ${2:fun2})",
+        ],
+        "description": [
+            "接收两个函数分别在第三个函数执行前和执行后执行",
+            "// g(h(f(x))) => promap(f, g, h)(x)"
+        ]
+    },
+    "生成数组序列，并保留参数自身": {
+        "prefix": [
+            "R.sequence",
+            "R.flow"
+        ],
+        "body": [
+            "R.sequence(${1:R.always(R.identity)}, [${2:fun2}])",
+        ],
+        "description": [
+            "生成数组序列，并保留参数自身",
+            "暂时理解为：用于生成参数，方便传参",
+            "// [[fn1(v), fn2(v), fn3(v)], fn()(v)] => R.sequence(fn, [fn1, fn2, fn3])(v)",
+            "const add = (n) => (x) => R.add(x, n)",
+            "let r3 = R.sequence(R.always(R.identity), [add(1), add(2), add(3)]);   //=> Just([1, 2, 3])",
+            "console.log(r3([1])) // [2,3,4,1]",
+        ]
+    },
+    "每个函数调用一次，生成/改变数组元素对应的数据": {
+        "prefix": [
+            "R.chain",
+            "R.flow"
+        ],
+        "body": [
+            "R.chain(${1:fun1}, ${2:fun2})",
+        ],
+        "description": [
+            "每个函数调用一次，生成/改变数组元素对应的数据",
+            "// 如果第二个参数是函数 f(g(x), x) => chain(f, g)(x)",
+            "// 区别于R.juxt（返回数据是数组），R.chain可以返回函数。",
+            "// eg.1 每个函数调用一次，生成数组元素对应的数据",
+            "const duplicate = n => [n, n];",
+            "R.chain(duplicate, [1, 2, 3]); //=> [1, 1, 2, 2, 3, 3]",
+            "R.chain(at, modalKeys) // => [atModalKeys[0], atModalKeys[1]] 生成两个函数",
+            "// eg.2 每个函数调用一次，改变原来的数据",
+            "R.chain(R.append, R.head)([1, 2, 3]); //=> [1, 2, 3, 1]"
+        ]
+    },
+    "多个分支，将子分支的调用结果作为参数传入一个函数调用": {
+        "prefix": [
+            "R.converge",
+            "R.flow"
+        ],
+        "body": [
+            "R.converge(${1:fun1}, [${2:fun2}, ${3:fun3}])",
+        ],
+        "description": [
+            "多个分支，将子分支的调用结果作为参数传入一个函数调用",
+            "const strangeConcat = R.converge(R.concat, [R.toUpper, R.toLower])",
+            "strangeConcat(\"Yodel\") //=> \"YODELyodel\""
+        ]
+    },
+    // sort R.so
+    "使用比较函数对列表进行排序": {
+        "prefix": [
+            "R.sort",
+            "R.so"
+        ],
+        "body": [
+            "R.sort(R.${1|descend,ascend|}(str), ${2:arr})"
+        ],
+        "description": "使用比较函数对列表进行排序"
+    },
+    "依据比较函数列表对输入列表进行排序。": {
+        "prefix": [
+            "R.sortWith",
+            "R.so"
+        ],
+        "body": [
+            "R.sortWith([",
+            "  R.descend(R.prop('age')),",
+            "  R.ascend(R.prop('name'))",
+            "])"
+        ],
+        "description": "依据比较函数列表对输入列表进行排序。"
+    },
+    "创建一个降序比较函数。": {
+        "prefix": [
+            "R.descend",
+            "R.so"
+        ],
+        "body": [
+            "R.descend(R.prop(${1:str}))",
+        ],
+        "description": [
+            "创建一个降序比较函数。",
+            "const byAge = R.descend(R.prop('age'));",
+            "const people = [",
+            "  { name: 'Emma', age: 70 },",
+            "  { name: 'Peter', age: 78 },",
+            "  { name: 'Mikhail', age: 62 },",
+            "];",
+            "const peopleByOldestFirst = R.sort(byAge, people);",
+            "  //=> [{ name: 'Peter', age: 78 }, { name: 'Emma', age: 70 }, { name: 'Mikhail', age: 62 }]"
+        ]
+    },
+    "创建一个升序比较函数。": {
+        "prefix": [
+            "R.ascend",
+            "R.so"
+        ],
+        "body": [
+            "R.ascend(R.prop(${1:str}))",
+        ],
+        "description": [
+            "创建一个升序比较函数。",
+            "const byAge = R.ascend(R.prop('age'));",
+            "const people = [",
+            "  { name: 'Emma', age: 70 },",
+            "  { name: 'Peter', age: 78 },",
+            "  { name: 'Mikhail', age: 62 },",
+            "];",
+            "const peopleByYoungestFirst = R.sort(byAge, people);",
+            "  //=> [{ name: 'Mikhail', age: 62 },{ name: 'Emma', age: 70 }, { name: 'Peter', age: 78 }]"
+        ]
+    },
+    "由首个参数是否小于第二个参数的判断函数，生成一个比较函数。": {
+        "prefix": [
+            "R.comparator",
+            "R.so"
+        ],
+        "body": [
+            "R.comparator(${1:(a, b) => a < b})"
+        ],
+        "description": "由首个参数是否小于第二个参数的判断函数，生成一个比较函数。"
     }
 }
